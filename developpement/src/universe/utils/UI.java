@@ -13,6 +13,7 @@ public class UI {
     private World world;
     private static final String question = "What do you want to do ?\n";
     private static final String methodError = "this action can not be carried out\n";
+    private static final String exception = "An exception has been raised :\n";
     private static final String unexpected = "Unexpected answer\n";
     private static final String possibilities = "Possible actions : \n"
             + " -get informations from the zone (enter : getinfo)\n"
@@ -24,6 +25,10 @@ public class UI {
             + " -read an object you have (enter : read <name_of_the_object>)\n"
             + " -go to a position in particular (enter : goto <x> <y>)\n";
 
+    public UI() {
+        this.world = null;
+    }
+    
     public UI(World world) {
         this.world = world;
     }
@@ -37,8 +42,9 @@ public class UI {
         return sc.nextLine();
     }
     
+    // All displays
     public void displayQuestion(){
-        this.display(question);
+        this.display(this.question);
     }
     
     public void displayWorld(){
@@ -46,11 +52,15 @@ public class UI {
     }
     
     public void displayPossibilities(){
-        this.display(possibilities);
+        this.display(this.possibilities);
     }
     
     public void displayMethodError(){
-        this.display(methodError);
+        this.display(this.methodError);
+    }
+    
+    public void displayException(String m) {
+        this.display(this.exception + m);
     }
     
     public String getUserAction() {

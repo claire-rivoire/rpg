@@ -29,47 +29,20 @@ public class Player extends Character implements Runnable {
         String action = this.getAction();
         if (!(action.equals(""))) {
             Task task = new Task(action);
-            System.out.println("task.getAction() = " + task.getAction());
+            //System.out.println("task.getAction() = " + task.getAction());
             try {
                 List<Object> completeMethod = task.getMethod();
-                System.out.println("task.getMethod()= " + completeMethod);
-                System.out.println("size " + completeMethod.size());
+                //System.out.println("task.getMethod()= " + completeMethod);
+                //System.out.println("size " + completeMethod.size());
                 if(completeMethod.size() == 1 ) {
                     ((Method) completeMethod.get(0)).invoke(this);
                 }
                 else {
                     ((Method) completeMethod.get(0)).invoke(this, completeMethod.get(1));
                 }
-            } catch (InvocationTargetException e) {
-                System.out.println("InvocationTargetException");
-                System.out.println("e.getMessage() = " + e.getMessage());
-                System.out.println("e.getStackTrace() = " + e.getStackTrace());
-
+            } catch (InvocationTargetException | NoSuchMethodException | IllegalAccessException | ClassNotFoundException e) {
                 UI userInterface = new UI(this.world);
-                userInterface.displayMethodError();
-            }
-            catch (NoSuchMethodException e) {
-                System.out.println("NoSuchMethodException");
-                System.out.println("e.getMessage() = " + e.getMessage());
-                System.out.println("e.getStackTrace() = " + e.getStackTrace());
-
-                UI userInterface = new UI(this.world);
-                userInterface.displayMethodError();
-            }
-            catch (IllegalAccessException e) {
-                System.out.println("IllegalAccessException");
-                System.out.println("e.getMessage() = " + e.getMessage());
-                System.out.println("e.getStackTrace() = " + e.getStackTrace());
-
-                UI userInterface = new UI(this.world);
-                userInterface.displayMethodError();
-            }
-            catch (ClassNotFoundException e) {
-                System.out.println("ClassNotFoundException");
-                System.out.println("e.getMessage() = " + e.getMessage());
-                System.out.println("e.getStackTrace() = " + e.getStackTrace());
-
-                UI userInterface = new UI(this.world);
+                userInterface.displayException(e.getMessage());
                 userInterface.displayMethodError();
             }
         }

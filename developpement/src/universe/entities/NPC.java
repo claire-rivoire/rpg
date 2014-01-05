@@ -9,7 +9,7 @@ import universe.desires.Objective;
 import universe.desires.Verb;
 import universe.intentions.PlanLibrary;
 import universe.intentions.Task;
-
+import universe.utils.UI;
 
 /**
  * @author pierre
@@ -52,7 +52,8 @@ public class NPC extends Character implements Runnable {
             catch (NoSuchMethodException | ClassNotFoundException
                     | IllegalAccessException | IllegalArgumentException
                     | InvocationTargetException e) {
-                e.printStackTrace();
+                UI ui = new UI();
+                ui.displayException(e.getMessage());
             }
         }
     }
